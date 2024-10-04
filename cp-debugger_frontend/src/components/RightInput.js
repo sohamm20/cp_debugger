@@ -1,15 +1,16 @@
 import React from 'react';
 
-function RightInput({setPythonCode}) {
+function RightInput(props) {
 
     return (
         <div>
-            <input
+            <textarea
                 id="inputBox"
-                type="text"
-                // value=''
-                onChange={(e) => setPythonCode(e.target.value)}
+                rows="5" // Adjust the number of rows to make it bigger
+                cols="30" // Adjust the number of columns to make it wider
+                onChange={(e) => props.setPythonCode(e.target.value)}
                 placeholder="Enter Right Code"
+                style={{ resize: 'vertical' }} // Allows vertical resizing
             />
         </div>
     )

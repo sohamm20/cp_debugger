@@ -1,46 +1,34 @@
 /* App.css */
 
-/* General styles for the app */
+/* Global styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  color: #333;
   margin: 0;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Styles for IPFormat component */
-.IPFormat {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 20px;
+h1 {
+  color: #4a4a4a;
+  margin: 20px 0; /* Add margin for spacing */
 }
 
-/* Container for input components */
+/* Input container styles */
 .input-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  width: 100%; /* Ensure the container takes full width */
+  max-width: 800px; /* Max width for alignment */
+  margin: 20px 0; /* Add margin for spacing */
 }
 
-/* Styles for RightInput component */
-.RightInput {
+.input-container > div {
   flex: 1;
-  background-color: #e6f7ff;
-  border: 1px solid #91caff;
-  border-radius: 5px;
-  padding: 15px;
-  margin-right: 10px;
-}
-
-/* Styles for WrongInput component */
-.WrongInput {
-  flex: 1;
-  background-color: #ffe6e6;
-  border: 1px solid #ff9999;
-  border-radius: 5px;
-  padding: 15px;
+  margin: 0 10px; /* Space between inputs */
 }
 
 /* Button styles */
@@ -48,12 +36,35 @@ button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 20px 0; /* Space above and below button */
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Result styles */
+.result-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e2e2e2;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 800px; /* Align result container with input */
+  text-align: center; /* Center align text */
+}
+
+.result-text {
+  font-size: 20px; /* Increase font size for result */
+  color: #333;
 }
