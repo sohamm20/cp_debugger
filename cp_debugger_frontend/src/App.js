@@ -107,7 +107,8 @@ function App() {
 
             const data = await response.json();
             if (response.ok) {
-                setOutput(data.output);
+                let res = `Input : ${data.input} | Correct Output : ${data.rightOutput} | Wrong Output : ${data.wrongOutput} | Iterations Required : ${data.iterations}`
+                setOutput(res);
             } else {
                 const errorMessage = `Error: ${data.error}`;
                 setOutput(errorMessage);

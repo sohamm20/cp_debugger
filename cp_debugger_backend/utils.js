@@ -1,23 +1,18 @@
 const { exec } = require('child_process');
 const { promisify } = require('util');
+const os = process.platform;
 
 // Run Python script and return the result
 async function runPythonScript(code, input) {
+  const { exec } = require("child_process");
   return new Promise((resolve, reject) => {
-    code = `import sys;import io;sys.stdin = io.StringIO('${input}'.replace(';', '\n'));${code}`;
-
-    console.log(code)
-
-    const command = `python -c "${code}"`;
+    code = `import sys;import io;sys.stdin = io.StringIO('${input}'.replace(';','\\n'));${code.replace(/"/g, '\\"')}`;
+    const pythonCmd = (process.platform === "darwin") ? "python3" : "python";
+    const command = `${pythonCmd} -c "${code}"`;
 
     exec(command, (error, stdout, stderr) => {
-      if (error) {
-        return reject(new Error(`Error executing script: ${error.message}`));
-      }
-      if (stderr) {
-        return reject(new Error(`Python error: ${stderr.trim()}`));
-      }
-
+      if (error) return reject(new Error(`Error executing script: ${error.message}`));
+      if (stderr) return reject(new Error(`Python error: ${stderr.trim()}`));
       resolve(stdout.trim());
     });
   });
