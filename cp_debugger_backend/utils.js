@@ -1,13 +1,11 @@
 const { exec } = require('child_process');
-const { promisify } = require('util');
 const os = process.platform;
 
 // Run Python script and return the result
 async function runPythonScript(code, input) {
-  const { exec } = require("child_process");
   return new Promise((resolve, reject) => {
     code = `import sys;import io;sys.stdin = io.StringIO('${input}'.replace(';','\\n'));${code.replace(/"/g, '\\"')}`;
-    const pythonCmd = (process.platform === "darwin") ? "python3" : "python";
+    const pythonCmd = (os === "darwin") ? "python3" : "python";
     const command = `${pythonCmd} -c "${code}"`;
 
     exec(command, (error, stdout, stderr) => {
