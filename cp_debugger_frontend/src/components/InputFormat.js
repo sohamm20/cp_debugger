@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './InputFormat.css'
 
-function IPFormat(props) {
+function InputFormat(props) {
     const [inputValue, setInputValue] = useState('1');
     const [selectedOptions, setSelectedOptions] = useState(['']); // State to track selected options
 
@@ -43,12 +44,12 @@ function IPFormat(props) {
             <input
                 id="inputBox"
                 type="text"
-                value={inputValue}
+                // value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type a number"
             />
-            <br />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <br/>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
                 {item.map((_, index) => (
                     <select
                         key={index}
@@ -63,10 +64,13 @@ function IPFormat(props) {
                     </select>
                 ))}
             </div>
+            <br></br>
             <button onClick={setInputFormat}>Set</button>
+            <br></br>
+            <br></br>
             {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
     );
 }
 
-export default IPFormat;
+export default InputFormat;

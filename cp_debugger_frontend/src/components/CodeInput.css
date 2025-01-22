@@ -1,0 +1,54 @@
+/* General body styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+}
+
+/* Main container styling */
+.codeinput-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Textarea styling */
+textarea#inputBox {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    resize: vertical; /* Allows vertical resizing */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea#inputBox:focus {
+    border-color: #6200ea;
+    box-shadow: 0 0 8px rgba(98, 0, 234, 0.5);
+    outline: none;
+}
+
+/* Placeholder styling */
+textarea#inputBox::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .codeinput-container {
+        padding: 15px;
+    }
+
+    textarea#inputBox {
+        font-size: 12px;
+    }
+}
