@@ -5,8 +5,8 @@ import CodeInput from './components/CodeInput';
 import InputFormat from "./components/InputFormat";
 
 const App = () => {
-    const [pythonCodeRight, setPythonCodeRight] = useState('');
-    const [pythonCodeWrong, setPythonCodeWrong] = useState('');
+    const [correctCode, setCorrectCode] = useState('');
+    const [incorrectCode, setIncorrectCode] = useState('');
     const [input, setInput] = useState('');
     const [output, setOutput] = useState([]);
     const [isExecuting, setIsExecuting] = useState(false);
@@ -18,8 +18,8 @@ const App = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    codeRight: pythonCodeRight,
-                    codeWrong: pythonCodeWrong,
+                    codeRight: correctCode,
+                    codeWrong: incorrectCode,
                     input,
                 }),
             });
@@ -42,13 +42,13 @@ const App = () => {
             <InputFormat setInput={setInput} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
                 <CodeInput
-                    pythonCode={pythonCodeRight}
-                    setPythonCode={setPythonCodeRight}
+                    pythonCode={correctCode}
+                    setPythonCode={setCorrectCode}
                     type = {"Correct"}
                 />
                 <CodeInput
-                    pythonCode={pythonCodeWrong}
-                    setPythonCode={setPythonCodeWrong}
+                    pythonCode={incorrectCode}
+                    setPythonCode={setIncorrectCode}
                     type = {"Incorrect"}
                 />
             </Box>

@@ -24,11 +24,6 @@ function InputFormat(props) {
         setSelectedOptions(newSelectedOptions); // Update state
     };
 
-    // const handleSubmit = () => {
-    //     console.log('Submitted values:', selectedOptions);
-    //     alert('You have submitted');
-    // };
-
     const setInputFormat = () => {
         var curr = '';
         curr += inputValue;
@@ -44,7 +39,6 @@ function InputFormat(props) {
             <input
                 id="inputBox"
                 type="text"
-                // value={inputValue}
                 onChange={handleInputChange}
                 placeholder="Type a number"
             />
@@ -68,7 +62,6 @@ function InputFormat(props) {
             <button onClick={setInputFormat}>Set</button>
             <br></br>
             <br></br>
-            {/* <button onClick={handleSubmit}>Submit</button> */}
         </div>
     );
 }
