@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import './App.css';
 import CodeInput from './components/CodeInput';
 import InputFormat from "./components/InputFormat";
+import LabeledToggle from "./components/LabeledToggle";
 
 const App = () => {
     const [correctCode, setCorrectCode] = useState('');
@@ -10,17 +11,19 @@ const App = () => {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState([]);
     const [isExecuting, setIsExecuting] = useState(false);
+    const [isPython, setIsPython] = useState(true); // Default to Python
 
     const executePythonCode = async () => {
         setIsExecuting(true);
         try {
-            const response = await fetch('http://localhost:5000/run-python', {
+            const response = await fetch('http://localhost:5000/run-code', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     codeRight: correctCode,
                     codeWrong: incorrectCode,
-                    input,
+                    input: input,
+                    language: (isPython ? 'python' : 'c++'),
                 }),
             });
 
@@ -38,18 +41,22 @@ const App = () => {
     };
 
     return (
-        <Box sx={{ p: 3, bgcolor: '#f5f5f5', borderRadius: '8px', boxShadow: 2 }}>
-            <InputFormat setInput={setInput} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+        <Box sx={{p: 3, bgcolor: '#f5f5f5', borderRadius: '8px', boxShadow: 2}}>
+            <InputFormat setInput={setInput}/>
+            <div>
+                <LabeledToggle setIsPython={setIsPython} isPython={isPython} />
+            </div>
+            <br/>
+            <Box sx={{display: 'flex', justifyContent: 'space-between', mb: 3}}>
                 <CodeInput
                     pythonCode={correctCode}
                     setPythonCode={setCorrectCode}
-                    type = {"Correct"}
+                    type={"Correct"}
                 />
                 <CodeInput
                     pythonCode={incorrectCode}
                     setPythonCode={setIncorrectCode}
-                    type = {"Incorrect"}
+                    type={"Incorrect"}
                 />
             </Box>
             <Button
@@ -66,12 +73,12 @@ const App = () => {
                 {isExecuting ? 'Executing...' : 'Find Failing Test'}
             </Button>
             {output.length > 0 && (
-                <Typography variant="h5" color="teal" sx={{ mt: 2 }}>
+                <Typography variant="h5" color="teal" sx={{mt: 2}}>
                     <strong>Result:</strong>
-                    <br /> Input: {output[0]}
-                    <br /> Correct Output: {output[1]}
-                    <br /> Wrong Output: {output[2]}
-                    <br /> Iterations Taken: {output[3]}
+                    <br/> Input: {output[0]}
+                    <br/> Correct Output: {output[1]}
+                    <br/> Wrong Output: {output[2]}
+                    <br/> Iterations Taken: {output[3]}
                 </Typography>
             )}
         </Box>

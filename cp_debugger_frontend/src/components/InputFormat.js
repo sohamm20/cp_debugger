@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './InputFormat.css'
 
 function InputFormat(props) {
@@ -24,25 +24,32 @@ function InputFormat(props) {
         setSelectedOptions(newSelectedOptions); // Update state
     };
 
-    const setInputFormat = () => {
+    useEffect(() => {
         var curr = '';
         curr += inputValue;
         for (var i = 0; i < inputValue; i++){
             curr += selectedOptions[i];
         }
         props.setInput(curr); // Call setInput with the selected formats
-    };
+    }, [selectedOptions]);
 
     return (
         <div>
-            <p>Enter number of input lines</p>
-            <input
-                id="inputBox"
-                type="text"
-                onChange={handleInputChange}
-                placeholder="Type a number"
-            />
-            <br/>
+            <div>
+                <label htmlFor="inputBox" style={{display: 'block', marginBottom: '5px'}}>
+                    Number of Input Lines
+                </label>
+                <input
+                    id="inputBox"
+                    type="number"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    min="1"
+                    max="100"
+                    step="1"
+                    style={{width: 'auto', textAlign: 'center'}}
+                />
+            </div>
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 {item.map((_, index) => (
                     <select
@@ -58,10 +65,7 @@ function InputFormat(props) {
                     </select>
                 ))}
             </div>
-            <br></br>
-            <button onClick={setInputFormat}>Set</button>
-            <br></br>
-            <br></br>
+            <br/>
         </div>
     );
 }

@@ -16,6 +16,28 @@ async function runPythonScript(code, input) {
   });
 }
 
+// Run C++ script and return the result
+async function runCppScript(code, input) {
+  return new Promise((resolve, reject) => {
+    // Example: Save code to a temp file, compile, then run.
+    // Adjust as needed for your environment.
+    const fs = require('fs');
+    const path = require('path');
+    const { exec } = require('child_process');
+    const tempFile = path.join(__dirname, 'temp.cpp');
+    
+    fs.writeFileSync(tempFile, code);
+    exec(`g++ ${tempFile} -o ${tempFile}.out && echo "${input.replace(';','\\n')}" | ${tempFile}.out`,
+      (error, stdout, stderr) => {
+        if (error) return reject(new Error(`C++ error: ${error.message}`));
+        if (stderr) return reject(new Error(`C++ stderr: ${stderr.trim()}`));
+        console.log(stdout);
+        resolve(stdout.trim());
+      }
+    );
+  });
+}
+
 // Generate random input
 function generateInput(input) {
   let ans = "";
@@ -54,4 +76,4 @@ function generateNumber() {
   return Math.round(Math.random() * 1000).toString();
 }
 
-module.exports = { runPythonScript, generateInput };
+module.exports = { runPythonScript, generateInput, runCppScript };

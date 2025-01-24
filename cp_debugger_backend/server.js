@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { runPythonScript, generateInput } = require('./utils');
+const { runPythonScript, generateInput, runCppScript } = require('./utils');
 
 // Initialize Express
 const app = express();
@@ -12,18 +12,19 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.post('/run-python', async (req, res) => {
-  const { codeRight, codeWrong, input } = req.body;
+app.post('/run-code', async (req, res) => {
+  const { codeRight, codeWrong, input, language } = req.body;
+  const runner = (language === 'c++') ? runCppScript : runPythonScript;
 
   try {
     let generatedInput = generateInput(input);
     let outputRight, outputWrong;
     let counter = 0;
-    const maxTries = 5;
+    const maxTries = 10;
 
     while (counter < maxTries) {
-      outputRight = await runPythonScript(codeRight, generatedInput);
-      outputWrong = await runPythonScript(codeWrong, generatedInput);
+      outputRight = await runner(codeRight, generatedInput);
+      outputWrong = await runner(codeWrong, generatedInput);
 
       if (outputRight !== outputWrong) {
         break;
