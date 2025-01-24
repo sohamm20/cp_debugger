@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.post('/run-code', async (req, res) => {
-  const { codeRight, codeWrong, input, language } = req.body;
-  const runner = (language === 'c++') ? runCppScript : runPythonScript;
+  const { codeRight, codeWrong, input, isPython } = req.body;
+  const runner = !isPython ? runCppScript : runPythonScript;
 
   try {
     let generatedInput = generateInput(input);

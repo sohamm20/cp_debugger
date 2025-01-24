@@ -22,8 +22,8 @@ const App = () => {
                 body: JSON.stringify({
                     codeRight: correctCode,
                     codeWrong: incorrectCode,
-                    input: input,
-                    language: (isPython ? 'python' : 'c++'),
+                    input,
+                    isPython,
                 }),
             });
 
@@ -78,7 +78,7 @@ const App = () => {
                     <br/> Input: {output[0]}
                     <br/> Correct Output: {output[1]}
                     <br/> Wrong Output: {output[2]}
-                    <br/> Iterations Taken: {output[3]}
+                    <br/> Iterations Taken: {output[3] + 1}
                 </Typography>
             )}
         </Box>
