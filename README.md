@@ -1,2 +1,3 @@
 # cp_debugger
-<img width="1728" alt="Screenshot 2025-01-23 at 2 30 08 AM" src="https://github.com/user-attachments/assets/2aef26a8-d30c-455e-b80a-773455227039" />
+
+<img width="1722" alt="Screenshot 2025-01-25 at 2 40 05 AM" src="https://github.com/user-attachments/assets/6fa9d693-0112-46d7-a1c2-8128bca31231" />
