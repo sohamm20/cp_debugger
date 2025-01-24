@@ -1,15 +1,15 @@
 import React from 'react';
+import './CodeInput.css'
 
-function CodeInput(props) {
+function CodeInput({ setPythonCode, type }) {
     return (
         <div>
             <textarea
                 id="inputBox"
-                rows="20" // Adjust the number of rows to make it bigger
-                cols="90" // Adjust the number of columns to make it wider
-                onChange={(e) => props.setPythonCode(e.target.value)}
-                placeholder={`Enter ${props.type} Code`}
-                style={{ resize: 'vertical' }} // Allows vertical resizing
+                rows="20"
+                cols="100"
+                onChange={(e) => setPythonCode(e.target.value)}
+                placeholder={`Enter ${type} Code`}
             />
         </div>
     )

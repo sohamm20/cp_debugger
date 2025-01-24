@@ -13,7 +13,7 @@ const App = () => {
     const [isExecuting, setIsExecuting] = useState(false);
     const [isPython, setIsPython] = useState(true); // Default to Python
 
-    const executePythonCode = async () => {
+    const runCode = async () => {
         setIsExecuting(true);
         try {
             const response = await fetch('http://localhost:5000/run-code', {
@@ -47,7 +47,7 @@ const App = () => {
                 <LabeledToggle setIsPython={setIsPython} isPython={isPython} />
             </div>
             <br/>
-            <Box sx={{display: 'flex', justifyContent: 'space-between', mb: 3}}>
+            <Box sx={{display: 'flex', justifyContent: "space-evenly", mb: 3}}>
                 <CodeInput
                     pythonCode={correctCode}
                     setPythonCode={setCorrectCode}
@@ -61,7 +61,7 @@ const App = () => {
             </Box>
             <Button
                 variant="contained"
-                onClick={() => !isExecuting && executePythonCode()}
+                onClick={() => !isExecuting && runCode()}
                 disabled={isExecuting}
                 sx={{
                     bgcolor: '#6200ea',

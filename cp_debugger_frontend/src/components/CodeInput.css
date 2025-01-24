@@ -20,7 +20,7 @@ body, html {
 
 /* Textarea styling */
 textarea#inputBox {
-    width: 100%;
+    width: 97%;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
