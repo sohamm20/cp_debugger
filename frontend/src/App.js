@@ -9,7 +9,7 @@ const App = () => {
     const [correctCode, setCorrectCode] = useState('');
     const [incorrectCode, setIncorrectCode] = useState('');
     const [input, setInput] = useState('');
-    const [output, setOutput] = useState([]);
+    const [output, setOutput] = useState(null);
     const [isExecuting, setIsExecuting] = useState(false);
     const [isPython, setIsPython] = useState(true); // Default to Python
 
@@ -29,12 +29,12 @@ const App = () => {
 
             const data = await response.json();
             if (response.ok) {
-                setOutput([data.input, data.rightOutput, data.wrongOutput, data.iterations]);
+                setOutput({ input: data.input, rightOutput: data.rightOutput, wrongOutput: data.wrongOutput, iterations: data.iterations });
             } else {
-                setOutput([`Error: ${data.error}`]);
+                setOutput({ error: data.error });
             }
         } catch (error) {
-            setOutput([`Error: ${error.message}`]);
+            setOutput({ error: error.message });
         } finally {
             setIsExecuting(false);
         }
@@ -52,11 +52,13 @@ const App = () => {
                     pythonCode={correctCode}
                     setPythonCode={setCorrectCode}
                     type={"Correct"}
+                    isPython={isPython}
                 />
                 <CodeInput
                     pythonCode={incorrectCode}
                     setPythonCode={setIncorrectCode}
                     type={"Incorrect"}
+                    isPython={isPython}
                 />
             </Box>
             <Button
@@ -72,13 +74,18 @@ const App = () => {
             >
                 {isExecuting ? 'Executing...' : 'Find Failing Test'}
             </Button>
-            {output.length > 0 && (
+            {output && output.error && (
+                <Typography variant="h6" color="error" sx={{mt: 2}}>
+                    <strong>Error:</strong> {output.error}
+                </Typography>
+            )}
+            {output && !output.error && (
                 <Typography variant="h5" color="teal" sx={{mt: 2}}>
                     <strong>Result:</strong>
-                    <br/> Input: {output[0]}
-                    <br/> Correct Output: {output[1]}
-                    <br/> Wrong Output: {output[2]}
-                    <br/> Iterations Taken: {output[3] + 1}
+                    <br/> <strong>Input:</strong> {output.input}
+                    <br/> <strong>Correct Output:</strong> {output.rightOutput}
+                    <br/> <strong>Wrong Output:</strong> {output.wrongOutput}
+                    <br/> <strong>Iterations Taken:</strong> {output.iterations + 1}
                 </Typography>
             )}
         </Box>

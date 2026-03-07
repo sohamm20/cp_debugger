@@ -1,3 +1,5 @@
 node_modules/
 temp.cpp
 temp.cpp.out
+temp.py
+temp_input.txt

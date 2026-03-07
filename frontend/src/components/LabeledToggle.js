@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './LabeledToggle.css'
 
 const LabeledToggle = ({setIsPython, isPython}) => {

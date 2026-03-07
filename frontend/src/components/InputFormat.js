@@ -9,12 +9,15 @@ function InputFormat(props) {
     const item = Array.from({ length: Math.max(1, Number(inputValue)) }, (_, index) => index);
 
     const handleInputChange = (event) => {
-        const value = event.target.value;
+        const value = parseInt(event.target.value, 10);
 
         // Ensure the input is a positive integer
         if (!isNaN(value) && value >= 1) {
-            setInputValue(value);
-            setSelectedOptions(Array.from({ length: Number(value) }, () => '')); // Reset selected options
+            setInputValue(value.toString());
+            // Preserve existing options when size changes
+            setSelectedOptions(prev => {
+                return Array.from({ length: value }, (_, i) => prev[i] || '');
+            });
         }
     };
 
@@ -25,12 +28,7 @@ function InputFormat(props) {
     };
 
     useEffect(() => {
-        var curr = '';
-        curr += inputValue;
-        for (var i = 0; i < inputValue; i++){
-            curr += selectedOptions[i];
-        }
-        props.setInput(curr); // Call setInput with the selected formats
+        props.setInput(selectedOptions);
     }, [selectedOptions]);
 
     return (
